@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Follower Count</title>
+</head>
+<body>
+    <h1>GitHub Follower Count</h1>
+    <input type="text" id="username" placeholder="Enter GitHub username">
+    <button onclick="fetchFollowers()">Fetch Followers</button>
+    <p id="result"></p>
+
+    <script>
+        function fetchFollowers() {
+            const username = document.getElementById('username').value;
+
+            fetch(`https://api.github.com/users/${username}`)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('User not found');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const followerCount = data.followers;
+                    document.getElementById('result').innerText = `User ${username} has ${followerCount} followers.`;
+                })
+              
+        }
+    </script>
+</body>
+</html>
