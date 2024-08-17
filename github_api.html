@@ -1,34 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GitHub Follower Count</title>
-    <link rel="stylesheet" href="github_api.css">
-</head>
-<body>
-    <h1>GitHub Follower Count</h1>
-    <input type="text" id="username" placeholder="Enter GitHub username">
-    <button onclick="fetchFollowers()">Fetch Followers</button>
-    <p id="result"></p>
+    <link rel="stylesheet" href="github_api.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>GitHub Follower Count</h1>
+      <input type="text" id="username" placeholder="Enter GitHub username" />
+      <a onclick="fetchFollowers()">Fetch Followers</a>
+      <p id="result"></p>
+    </div>
 
+    
     <script>
-        function fetchFollowers() {
-            const username = document.getElementById('username').value;
+      function fetchFollowers() {
+        const username = document.getElementById("username").value;
 
-            fetch(`https://api.github.com/users/${username}`)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('User not found');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    const followerCount = data.followers;
-                    document.getElementById('result').innerText = `User ${username} has ${followerCount} followers.`;
-                })
-              
-        }
+        fetch(`https://api.github.com/users/${username}`)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("User not found");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            const followerCount = data.followers;
+            document.getElementById(
+              "result"
+            ).innerText = `User ${username} has ${followerCount} followers.`;
+          });
+      }
     </script>
-</body>
+  </body>
 </html>
